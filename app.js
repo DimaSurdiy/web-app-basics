@@ -1,27 +1,29 @@
 const express = require('express');
 const exhbs = require('express-handlebars');
+const products = require('./products.json');
 
 const app = express();
 
 app.use(express.static('public'));
-app.set('view engine', 'hbs');
+
 app.engine(
   'hbs',
-  exhbs({
+  exhbs.engine({
     extname: 'hbs',
   }),
 );
+app.set('view engine', 'hbs');
 
 app.get('/', (req, res) => {
-  res.send('<h1>Hello World!</h1><h2>Это страничка /</h2>');
-
-  console.log(req.url);
+  res.render('home');
 });
 
 app.get('/about', (req, res) => {
-  res.send('<h2>Это страничка About</h2>');
+  res.render('about', { cssFileName: 'about' });
+});
 
-  console.log(req.url);
+app.get('/products', (req, res) => {
+  res.render('products', { products, cssFileName: 'products' });
 });
 
 app.listen(4444, () => {
