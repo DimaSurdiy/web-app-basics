@@ -15,15 +15,19 @@ app.engine(
 app.set('view engine', 'hbs');
 
 app.get('/', (req, res) => {
-  res.render('home');
+  res.render('home', { pageTitle: 'Главная страница' });
 });
 
 app.get('/about', (req, res) => {
-  res.render('about', { cssFileName: 'about' });
+  res.render('about', { cssFileName: 'about', pageTitle: 'О нас' });
 });
 
 app.get('/products', (req, res) => {
-  res.render('products', { products, cssFileName: 'products' });
+  res.render('products', {
+    products,
+    cssFileName: 'products',
+    pageTitle: 'Наши товары',
+  });
 });
 
 app.listen(4444, () => {
